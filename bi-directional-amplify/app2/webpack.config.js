@@ -29,7 +29,7 @@ module.exports = {
       name: "app2",
       filename: "remoteEntry.js",
       remotes: {
-        app1: "app1@http://localhost:3001/remoteEntry.js",
+        app1: "app1@https://d24jcvf7ms0hac.cloudfront.net/remoteEntry.js",
       },
       exposes: {
         "./Button": "./src/Button",
