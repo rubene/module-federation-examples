@@ -1,0 +1,6 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "app2e746cc61",
+  "serviceType": "imported",
+  "region": "us-east-1"
+}
