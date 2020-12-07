@@ -4,14 +4,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require("path");
 const deps = require("./package.json").dependencies;
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index",
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     port: 3002,
   },
   output: {
-    publicPath: '/',
+    publicPath: "http://localhost:3002/",
     // publicPath: 'auto',
   },
   module: {
@@ -36,10 +36,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "app2",
       filename: "remoteEntry.js",
-      // remotes: {
-      //   app1: "app1@https://d24jcvf7ms0hac.cloudfront.net/remoteEntry.js",
-      //   // app1: "app1@http://localhost:3001/remoteEntry.js",
-      // },
+      remotes: {
+        // app1: "app1@https://d24jcvf7ms0hac.cloudfront.net/remoteEntry.js",
+        app1: "app1@http://localhost:3001/remoteEntry.js",
+      },
       exposes: {
         "./Button": "./src/Button",
         "./App": "./src/App"
@@ -48,22 +48,14 @@ module.exports = {
         {
           ...deps,
           react: {
-            eager: true,
+            // eager: true,
             singleton: true,
             requiredVersion: deps.react,
           },
           "react-dom": {
-            eager: true,
+            // eager: true,
             singleton: true,
             requiredVersion: deps["react-dom"],
-          },
-          "aws-amplify": {
-            eager: true,
-            singleton: true,
-          },
-          "@aws-amplify/ui-react": {
-            eager: true,
-            singleton: true,
           }
         },
       ],

@@ -6,7 +6,7 @@ import React from "react";
 Amplify.configure(awsconfig);
 
 const RemoteButton = React.lazy(() => import("app2/App"));
-// console.log("remote: ", RemoteButton)
+console.log("remote: ", RemoteButton)
 
 const App = () => (
   <div>

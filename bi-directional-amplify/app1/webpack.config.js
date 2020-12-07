@@ -12,7 +12,7 @@ module.exports = {
     port: 3001,
   },
   output: {
-    publicPath: "/",
+    publicPath: "http://localhost:3001/",
   },
   module: {
     rules: [
@@ -45,8 +45,8 @@ module.exports = {
       name: "app1",
       filename: "remoteEntry.js",
       remotes: {
-        app2: "app2@https://d3tlpbej7bbuwi.cloudfront.net/remoteEntry.js",
-        // app2: "app2@http://localhost:3002/remoteEntry.js",
+        // app2: "app2@https://d3tlpbej7bbuwi.cloudfront.net/remoteEntry.js",
+        app2: "app2@http://localhost:3002/remoteEntry.js",
       },
       exposes: {
         "./Button": "./src/Button",
@@ -56,22 +56,14 @@ module.exports = {
         {
           ...deps,
           react: {
-            eager: true,
+            // eager: true,
             singleton: true,
             requiredVersion: deps.react,
           },
           "react-dom": {
-            eager: true,
+            // eager: true,
             singleton: true,
             requiredVersion: deps["react-dom"],
-          },
-          "aws-amplify": {
-            eager: true,
-            singleton: true,
-          },
-          "@aws-amplify/ui-react": {
-            eager: true,
-            singleton: true,
           }
         },
       ],
