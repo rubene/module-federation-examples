@@ -11,8 +11,11 @@ module.exports = {
     port: 3002,
   },
   output: {
+    path: path.resolve(process.cwd(), 'dist'),
     publicPath: "http://localhost:3002/",
+    // publicPath: "https://d3tlpbej7bbuwi.cloudfront.net/",
     // publicPath: 'auto',
+    // publicPath: '/',
   },
   module: {
     rules: [
@@ -37,8 +40,8 @@ module.exports = {
       name: "app2",
       filename: "remoteEntry.js",
       remotes: {
-        // app1: "app1@https://d24jcvf7ms0hac.cloudfront.net/remoteEntry.js",
-        app1: "app1@http://localhost:3001/remoteEntry.js",
+        app1: "app1@https://d24jcvf7ms0hac.cloudfront.net/remoteEntry.js",
+        // app1: "app1@http://localhost:3001/remoteEntry.js",
       },
       exposes: {
         "./Button": "./src/Button",
