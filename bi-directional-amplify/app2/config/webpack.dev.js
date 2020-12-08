@@ -1,5 +1,7 @@
 const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require("webpack").container;
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const commonConfig = require('./webpack.common');
 
 const path = require("path");

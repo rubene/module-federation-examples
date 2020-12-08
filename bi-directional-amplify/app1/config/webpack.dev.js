@@ -1,23 +1,27 @@
 const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require("webpack").container;
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const commonConfig = require('./webpack.common');
+
+const path = require("path");
 const deps = require("../package.json").dependencies;
 
-const prodConfig = {
-  mode: "production",
-  output: {
-    filename: "[name].[contenthash].js",
+const devConfig = {
+  mode: "development",
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    port: 3001,
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "app2",
+      name: "app1",
       filename: "remoteEntry.js",
       remotes: {
-        app1: "app1@https://d24jcvf7ms0hac.cloudfront.net/remoteEntry.js",
+        app2: "app2@http://localhost:3002/remoteEntry.js",
       },
       exposes: {
         "./Button": "./src/Button",
-        "./App": "./src/App",
       },
       // sharing code based on the installed version, to allow for multiple vendors with different versions
       shared: [
@@ -36,7 +40,11 @@ const prodConfig = {
         },
       ],
     }),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+    new CleanWebpackPlugin(),
   ],
 };
 
-module.exports = merge(commonConfig, prodConfig);
+module.exports = merge(commonConfig, devConfig);
